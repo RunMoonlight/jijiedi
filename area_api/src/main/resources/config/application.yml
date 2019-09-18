@@ -1,0 +1,44 @@
+server:
+  session-timeout: 1800
+#    tomcat:
+#        max-threads: 1000
+#        min-spare-threads: 30
+  port: 8080
+#    uri-encoding: utf-8
+spring:
+  thymeleaf:
+    cache: false
+    prefix: classpath:templates/
+  messages:
+    basename: static.i18n.messages #相对路径 首部请勿添加斜杠
+
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  profiles:
+    active: dev
+  devtools:
+#热部署生效
+    restart:
+      enabled: true
+#设置重启的目录，添加那个目录的文件需要restart（监听目录）
+    remote:
+      context-path: src/main/java
+  cache:
+    type: ehcache
+    ehcache:
+      config: config/ehcache.xml
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.area.entity.*
+  check-config-location: true
+
+#logging:
+#  config: ls-diu/src/main/resources/logback-dev.xml
+
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql

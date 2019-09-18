@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.area.api.dao.UserDao">
+
+    <resultMap type="com.area.api.entity.User" id="UserMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="gender" column="gender" jdbcType="VARCHAR"/>
+        <result property="photo" column="photo" jdbcType="VARCHAR"/>
+        <result property="autograph" column="autograph" jdbcType="VARCHAR"/>
+        <result property="privacyProtection" column="privacy_protection" jdbcType="VARCHAR"/>
+        <result property="praiseNumb" column="praise_numb" jdbcType="INTEGER"/>
+        <result property="thankNumb" column="thank_numb" jdbcType="INTEGER"/>
+        <result property="questionNumb" column="question_numb" jdbcType="INTEGER"/>
+        <result property="answerNumb" column="answer_numb" jdbcType="INTEGER"/>
+        <result property="collectNumb" column="collect_numb" jdbcType="INTEGER"/>
+        <result property="editNumb" column="edit_numb" jdbcType="INTEGER"/>
+        <result property="attentionNumb" column="attention_numb" jdbcType="INTEGER"/>
+        <result property="followerNumb" column="follower_numb" jdbcType="INTEGER"/>
+        <result property="concernTopicNumb" column="concern_topic_numb" jdbcType="INTEGER"/>
+        <result property="personalityUrl" column="personality_url" jdbcType="VARCHAR"/>
+        <result property="emailActivate" column="email_activate" jdbcType="VARCHAR"/>
+        <result property="forbidden" column="forbidden" jdbcType="VARCHAR"/>
+        <result property="forbiddenTime" column="forbidden_time" jdbcType="OTHER"/>
+        <result property="role" column="role" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="OTHER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="UserMap">
+        select
+          id, email, password, name, gender, photo, autograph, privacy_protection, praise_numb, thank_numb, question_numb, answer_numb, collect_numb, edit_numb, attention_numb, follower_numb, concern_topic_numb, personality_url, email_activate, forbidden, forbidden_time, role, create_time
+        from jijiedi.user
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="UserMap">
+        select
+          id, email, password, name, gender, photo, autograph, privacy_protection, praise_numb, thank_numb, question_numb, answer_numb, collect_numb, edit_numb, attention_numb, follower_numb, concern_topic_numb, personality_url, email_activate, forbidden, forbidden_time, role, create_time
+        from jijiedi.user
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="UserMap">
+        select
+          id, email, password, name, gender, photo, autograph, privacy_protection, praise_numb, thank_numb, question_numb, answer_numb, collect_numb, edit_numb, attention_numb, follower_numb, concern_topic_numb, personality_url, email_activate, forbidden, forbidden_time, role, create_time
+        from jijiedi.user
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+            <if test="password != null and password != ''">
+                and password = #{password}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="gender != null and gender != ''">
+                and gender = #{gender}
+            </if>
+            <if test="photo != null and photo != ''">
+                and photo = #{photo}
+            </if>
+            <if test="autograph != null and autograph != ''">
+                and autograph = #{autograph}
+            </if>
+            <if test="privacyProtection != null and privacyProtection != ''">
+                and privacy_protection = #{privacyProtection}
+            </if>
+            <if test="praiseNumb != null">
+                and praise_numb = #{praiseNumb}
+            </if>
+            <if test="thankNumb != null">
+                and thank_numb = #{thankNumb}
+            </if>
+            <if test="questionNumb != null">
+                and question_numb = #{questionNumb}
+            </if>
+            <if test="answerNumb != null">
+                and answer_numb = #{answerNumb}
+            </if>
+            <if test="collectNumb != null">
+                and collect_numb = #{collectNumb}
+            </if>
+            <if test="editNumb != null">
+                and edit_numb = #{editNumb}
+            </if>
+            <if test="attentionNumb != null">
+                and attention_numb = #{attentionNumb}
+            </if>
+            <if test="followerNumb != null">
+                and follower_numb = #{followerNumb}
+            </if>
+            <if test="concernTopicNumb != null">
+                and concern_topic_numb = #{concernTopicNumb}
+            </if>
+            <if test="personalityUrl != null and personalityUrl != ''">
+                and personality_url = #{personalityUrl}
+            </if>
+            <if test="emailActivate != null and emailActivate != ''">
+                and email_activate = #{emailActivate}
+            </if>
+            <if test="forbidden != null and forbidden != ''">
+                and forbidden = #{forbidden}
+            </if>
+            <if test="forbiddenTime != null">
+                and forbidden_time = #{forbiddenTime}
+            </if>
+            <if test="role != null and role != ''">
+                and role = #{role}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into jijiedi.user(email, password, name, gender, photo, autograph, privacy_protection, praise_numb, thank_numb, question_numb, answer_numb, collect_numb, edit_numb, attention_numb, follower_numb, concern_topic_numb, personality_url, email_activate, forbidden, forbidden_time, role, create_time)
+        values (#{email}, #{password}, #{name}, #{gender}, #{photo}, #{autograph}, #{privacyProtection}, #{praiseNumb}, #{thankNumb}, #{questionNumb}, #{answerNumb}, #{collectNumb}, #{editNumb}, #{attentionNumb}, #{followerNumb}, #{concernTopicNumb}, #{personalityUrl}, #{emailActivate}, #{forbidden}, #{forbiddenTime}, #{role}, #{createTime})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update jijiedi.user
+        <set>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="gender != null and gender != ''">
+                gender = #{gender},
+            </if>
+            <if test="photo != null and photo != ''">
+                photo = #{photo},
+            </if>
+            <if test="autograph != null and autograph != ''">
+                autograph = #{autograph},
+            </if>
+            <if test="privacyProtection != null and privacyProtection != ''">
+                privacy_protection = #{privacyProtection},
+            </if>
+            <if test="praiseNumb != null">
+                praise_numb = #{praiseNumb},
+            </if>
+            <if test="thankNumb != null">
+                thank_numb = #{thankNumb},
+            </if>
+            <if test="questionNumb != null">
+                question_numb = #{questionNumb},
+            </if>
+            <if test="answerNumb != null">
+                answer_numb = #{answerNumb},
+            </if>
+            <if test="collectNumb != null">
+                collect_numb = #{collectNumb},
+            </if>
+            <if test="editNumb != null">
+                edit_numb = #{editNumb},
+            </if>
+            <if test="attentionNumb != null">
+                attention_numb = #{attentionNumb},
+            </if>
+            <if test="followerNumb != null">
+                follower_numb = #{followerNumb},
+            </if>
+            <if test="concernTopicNumb != null">
+                concern_topic_numb = #{concernTopicNumb},
+            </if>
+            <if test="personalityUrl != null and personalityUrl != ''">
+                personality_url = #{personalityUrl},
+            </if>
+            <if test="emailActivate != null and emailActivate != ''">
+                email_activate = #{emailActivate},
+            </if>
+            <if test="forbidden != null and forbidden != ''">
+                forbidden = #{forbidden},
+            </if>
+            <if test="forbiddenTime != null">
+                forbidden_time = #{forbiddenTime},
+            </if>
+            <if test="role != null and role != ''">
+                role = #{role},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from jijiedi.user where id = #{id}
+    </delete>
+
+</mapper>
