@@ -31,7 +31,7 @@ spring:
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.area.entity.*
+  type-aliases-package: com.area.api.entity.*
   check-config-location: true
 
 #logging:

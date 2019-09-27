@@ -1,16 +1,17 @@
 package com.area.api.entity;
 
+import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
  * (User)实体类
  *
  * @author 奔跑的月光
- * @since 2019-09-15 12:43:05
+ * @since 2019-09-26 10:04:35
  */
 public class User implements Serializable {
-    private static final long serialVersionUID = 378321942263054292L;
-    
+    private static final long serialVersionUID = 343587485607554759L;
+    @Id
     private Integer id;
     //邮箱
     private String email;
